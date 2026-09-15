@@ -1,8 +1,9 @@
 # Robots.txt for Khulna News 24
 User-agent: *
 Allow: /
+
 Disallow: /admin
 Disallow: /admin/*
 Disallow: /login
 
-Sitemap: https://khulnanews.com/sitemap.xml
+Sitemap: https://khulnanews24.pages.dev/sitemap.xml

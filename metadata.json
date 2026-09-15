@@ -1,0 +1,6 @@
+{
+  "name": "খুলনা নিউজ ২৪ - Khulna News 24",
+  "description": "খুলনা ও খুলনা বিভাগের ১০ জেলার সর্বশেষ তাজা খবর, ব্রেকিং নিউজ, স্থানীয় সংবাদ ও বস্তুনিষ্ঠ বিশ্লেষণ।",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

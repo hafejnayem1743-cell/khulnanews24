@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>খুলনা নিউজ ২৪ | খুলনা ও ১০ জেলার সর্বশেষ খবর</title>
+    <meta name="description" content="খুলনা নিউজ ২৪ | খুলনা ও খুলনা বিভাগের ১০ জেলার সর্বশেষ তাজা খবর, ব্রেকিং নিউজ, স্থানীয় সংবাদ, রাজনীতি ও জনজীবনের বস্তুনিষ্ঠ বিশ্লেষণ।" />
+    <meta property="og:title" content="খুলনা নিউজ ২৪ | খুলনা ও ১০ জেলার সর্বশেষ খবর" />
+    <meta property="og:description" content="খুলনা নিউজ ২৪ | খুলনা ও খুলনা বিভাগের ১০ জেলার সর্বশেষ তাজা খবর, ব্রেকিং নিউজ, স্থানীয় সংবাদ, রাজনীতি ও জনজীবনের বস্তুনিষ্ঠ বিশ্লেষণ।" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="খুলনা নিউজ ২৪" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#dc2626" />
+    
+    <!-- Google Fonts for Bengali -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23dc2626'/><text x='50%' y='68%' font-size='60' font-weight='900' fill='white' text-anchor='middle' font-family='sans-serif'>খ</text></svg>" />
+
+    <script>
+      (function() {
+        try {
+          var rawTheme = localStorage.getItem('khulna_theme_mode_v1');
+          if (rawTheme) {
+            var theme = JSON.parse(rawTheme);
+            if (theme === 'dark') {
+              document.documentElement.classList.add('dark');
+              document.documentElement.setAttribute('data-theme', 'dark');
+              document.documentElement.style.colorScheme = 'dark';
+            } else {
+              document.documentElement.classList.remove('dark');
+              document.documentElement.setAttribute('data-theme', 'light');
+              document.documentElement.style.colorScheme = 'light';
+            }
+          }
+        } catch(e) {}
+
+        // Initialize language cookie before translate script loads
+        try {
+          var savedLang = localStorage.getItem('khulna_selected_language');
+          if (savedLang && savedLang !== 'bn') {
+            var cookieVal = '/bn/' + savedLang;
+            document.cookie = 'googtrans=' + cookieVal + '; path=/;';
+            if (window.location.hostname) {
+              document.cookie = 'googtrans=' + cookieVal + '; path=/; domain=' + window.location.hostname + ';';
+            }
+          }
+        } catch(e) {}
+      })();
+
+      function googleTranslateElementInit() {
+        try {
+          if (window.google && window.google.translate) {
+            new window.google.translate.TranslateElement({
+              pageLanguage: 'bn',
+              autoDisplay: false
+            }, 'google_translate_element');
+          }
+        } catch(e) {}
+      }
+    </script>
+  </head>
+  <body class="bg-[#f8f9fa] dark:bg-[#0f172a] text-[#1e293b] dark:text-[#f1f5f9] transition-colors duration-200 antialiased selection:bg-red-600 selection:text-white">
+    <div id="google_translate_element" style="display: none !important;"></div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async defer></script>
+  </body>
+</html>
+

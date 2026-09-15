@@ -1,0 +1,19 @@
+name = "khulna-news-collector"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+# 100% Free-Tier Cloudflare Worker with Cron Trigger
+# Runs every 30 minutes to automatically poll RSS feeds
+[triggers]
+crons = ["*/30 * * * *"]
+
+# Optional Environment Variables
+[vars]
+CORS_ORIGIN = "*"
+SECRET_API_KEY = ""
+
+
+# Persistent free-tier storage (required for production durability).
+# Create once with: npx wrangler kv namespace create NEWS_KV
+# Then add the returned id below before deploying:
+# Run setup-kv.ps1 (Windows) or setup-kv.sh (macOS/Linux) to create and bind the free KV namespace.

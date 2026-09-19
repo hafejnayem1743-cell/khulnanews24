@@ -33,3 +33,8 @@ View your app in AI Studio: https://ai.studio/apps/a24eb73a-51e8-4e16-bce1-1614c
 
 ## v9.3
 Homepage now displays the full merged published Worker feed in the main latest-news section, with responsive styling and the existing in-post sharing controls preserved.
+
+
+## v9.6 Update
+
+Advertising placements were polished using the supplied Adsterra formats, and the public advertising contact page was redesigned so contact details are not printed on-screen; the configured phone, WhatsApp and email actions remain directly clickable.

@@ -517,7 +517,7 @@ export const DEFAULT_NEWS: NewsItem[] = [
 export const DEFAULT_AD_SLOTS: AdSlot[] = [
   {
     id: 'ad-header-banner',
-    name: 'Header Banner (728x90 / Responsive)',
+    name: 'Header Banner (728x90)',
     position: 'HEADER_BANNER',
     isActive: true,
     adCode: `<script>atOptions = {'key' : 'c871f5d4559093c55fdfa2485e072c70','format' : 'iframe','height' : 90,'width' : 728,'params' : {}};</script><script src="https://www.highrevenueformat.com/c871f5d4559093c55fdfa2485e072c70/invoke.js"></script>`,
@@ -526,7 +526,7 @@ export const DEFAULT_AD_SLOTS: AdSlot[] = [
   },
   {
     id: 'ad-homepage-top',
-    name: 'Homepage Top Banner',
+    name: 'Homepage Top Banner (728x90)',
     position: 'HOMEPAGE_TOP',
     isActive: true,
     adCode: `<script>atOptions = {'key' : 'c871f5d4559093c55fdfa2485e072c70','format' : 'iframe','height' : 90,'width' : 728,'params' : {}};</script><script src="https://www.highrevenueformat.com/c871f5d4559093c55fdfa2485e072c70/invoke.js"></script>`,
@@ -535,7 +535,7 @@ export const DEFAULT_AD_SLOTS: AdSlot[] = [
   },
   {
     id: 'ad-homepage-middle',
-    name: 'Homepage Middle Banner',
+    name: 'Homepage Middle Banner (728x90)',
     position: 'HOMEPAGE_MIDDLE',
     isActive: true,
     adCode: `<script>atOptions = {'key' : 'c871f5d4559093c55fdfa2485e072c70','format' : 'iframe','height' : 90,'width' : 728,'params' : {}};</script><script src="https://www.highrevenueformat.com/c871f5d4559093c55fdfa2485e072c70/invoke.js"></script>`,
@@ -544,7 +544,7 @@ export const DEFAULT_AD_SLOTS: AdSlot[] = [
   },
   {
     id: 'ad-sidebar-top',
-    name: 'Sidebar Top Square (300x250)',
+    name: 'Sidebar Native Banner',
     position: 'SIDEBAR_TOP',
     isActive: true,
     adCode: `<script async="async" data-cfasync="false" src="https://pl31404088.profitableratecpmnetwork.com/429709e3416bbabd55849785b662ca8f/invoke.js"></script><div id="container-429709e3416bbabd55849785b662ca8f"></div>`,
@@ -553,7 +553,7 @@ export const DEFAULT_AD_SLOTS: AdSlot[] = [
   },
   {
     id: 'ad-sidebar-middle',
-    name: 'Sidebar Middle Banner',
+    name: 'Sidebar Native Banner (Reserved)',
     position: 'SIDEBAR_MIDDLE',
     isActive: false,
     adCode: `<script async="async" data-cfasync="false" src="https://pl31404088.profitableratecpmnetwork.com/429709e3416bbabd55849785b662ca8f/invoke.js"></script><div id="container-429709e3416bbabd55849785b662ca8f"></div>`,
@@ -562,7 +562,7 @@ export const DEFAULT_AD_SLOTS: AdSlot[] = [
   },
   {
     id: 'ad-article-top',
-    name: 'Article Top Banner',
+    name: 'Article Top Banner (728x90)',
     position: 'ARTICLE_TOP',
     isActive: true,
     adCode: `<script>atOptions = {'key' : 'c871f5d4559093c55fdfa2485e072c70','format' : 'iframe','height' : 90,'width' : 728,'params' : {}};</script><script src="https://www.highrevenueformat.com/c871f5d4559093c55fdfa2485e072c70/invoke.js"></script>`,
@@ -571,7 +571,7 @@ export const DEFAULT_AD_SLOTS: AdSlot[] = [
   },
   {
     id: 'ad-article-middle',
-    name: 'Article Middle Banner',
+    name: 'Article In-Content Banner (728x90)',
     position: 'ARTICLE_MIDDLE',
     isActive: true,
     adCode: `<script>atOptions = {'key' : 'c871f5d4559093c55fdfa2485e072c70','format' : 'iframe','height' : 90,'width' : 728,'params' : {}};</script><script src="https://www.highrevenueformat.com/c871f5d4559093c55fdfa2485e072c70/invoke.js"></script>`,
@@ -580,7 +580,7 @@ export const DEFAULT_AD_SLOTS: AdSlot[] = [
   },
   {
     id: 'ad-article-bottom',
-    name: 'Article Bottom Banner',
+    name: 'Article Bottom Banner (728x90)',
     position: 'ARTICLE_BOTTOM',
     isActive: true,
     adCode: `<script>atOptions = {'key' : 'c871f5d4559093c55fdfa2485e072c70','format' : 'iframe','height' : 90,'width' : 728,'params' : {}};</script><script src="https://www.highrevenueformat.com/c871f5d4559093c55fdfa2485e072c70/invoke.js"></script>`,
@@ -591,14 +591,14 @@ export const DEFAULT_AD_SLOTS: AdSlot[] = [
     id: 'ad-social-bar',
     name: 'Adsterra Social Bar',
     position: 'SOCIAL_BAR',
-    isActive: false,
+    isActive: true,
     adCode: `<script src="https://pl31404090.profitableratecpmnetwork.com/80/eb/93/80eb93181df6c6d812dc27e1c7be49e6.js"></script>`,
     priority: 9,
     adsterraType: 'social_bar'
   },
   {
     id: 'ad-popunder',
-    name: 'Adsterra Popunder',
+    name: 'Adsterra Popunder (Optional)',
     position: 'POPUNDER',
     isActive: false,
     adCode: `<script src="https://pl31404089.profitableratecpmnetwork.com/32/7b/c4/327bc41935c3bde1f158cd92e2371cf0.js"></script>`,

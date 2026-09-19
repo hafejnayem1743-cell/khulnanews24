@@ -1,31 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useLocation, useParams, Link } from 'react-router-dom';
 import { useNews } from '../../context/NewsContext';
 import { SeoHead } from '../../components/common/SeoHead';
 import { NewsCard } from '../../components/common/NewsCard';
-import { MapPin, Phone, Mail, Send, CheckCircle2, ShieldCheck, FileText, Info } from 'lucide-react';
+import { ShieldCheck, FileText, Info, Phone, Mail, Megaphone, MessageCircle, ExternalLink } from 'lucide-react';
+import { AdsterraSlot } from '../../components/common/AdsterraSlot';
 
 export const LegalPage: React.FC = () => {
   const location = useLocation();
   const { tag } = useParams<{ tag?: string }>();
-  const { siteSettings, news, showToast } = useNews();
-
-  const [contactName, setContactName] = useState('');
-  const [contactEmail, setContactEmail] = useState('');
-  const [contactSubject, setContactSubject] = useState('');
-  const [contactMessage, setContactMessage] = useState('');
-  const [contactSent, setContactSent] = useState(false);
-
-  const handleContactSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!contactName.trim() || !contactMessage.trim()) return;
-    setContactSent(true);
-    showToast('আপনার বার্তাটি সফলভাবে পাঠানো হয়েছে! শীঘ্রই আমরা আপনার সাথে যোগাযোগ করব।', 'success');
-    setContactName('');
-    setContactEmail('');
-    setContactSubject('');
-    setContactMessage('');
-  };
+  const { siteSettings, news } = useNews();
 
   // 1. TAG PAGE
   if (location.pathname.startsWith('/tag') && tag) {
@@ -49,158 +33,73 @@ export const LegalPage: React.FC = () => {
     );
   }
 
-  // 2. CONTACT US PAGE
+  // 2. CONTACT / ADVERTISING PAGE
   if (location.pathname === '/contact') {
+    const cleanPhone = (siteSettings.phone || '').replace(/[^0-9]/g, '');
+    const cleanWhatsApp = (siteSettings.whatsapp || '').replace(/[^0-9]/g, '');
+    const phoneLink = cleanPhone ? `tel:${cleanPhone.startsWith('88') ? `+${cleanPhone}` : `+88${cleanPhone.replace(/^0/, '0')}`}` : '#';
+    const whatsappLink = cleanWhatsApp ? `https://wa.me/${cleanWhatsApp.startsWith('88') ? cleanWhatsApp : `88${cleanWhatsApp}`}` : '#';
+    const emailLink = siteSettings.email?.trim() ? `mailto:${siteSettings.email.trim()}` : '#';
+
     return (
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 py-6 sm:py-10 min-h-screen">
-        <SeoHead title="যোগাযোগ ও বিজ্ঞাপন" description="খুলনা নিউজ কর্তৃপক্ষের সাথে যোগাযোগ করুন ও বিজ্ঞাপনের তথ্যাবলি জানুন।" />
-        
-        <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-10">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-2 sm:mb-3">যোগাযোগ ও বিজ্ঞাপন</h1>
-          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-            সংবাদ সংক্রান্ত মতামত, তথ্য বা বিজ্ঞাপনের যেকোনো তথ্যের জন্য আমাদের সাথে সরাসরি যোগাযোগ করুন।
-          </p>
-        </div>
+      <div className="min-h-screen bg-[#F8F9FA] dark:bg-[#0F172A]">
+        <SeoHead title="বিজ্ঞাপন দিতে যোগাযোগ করুন" description="খুলনা নিউজ ২৪-এ বিজ্ঞাপন, স্পন্সরশিপ ও ব্যবসায়িক যোগাযোগের জন্য সরাসরি যোগাযোগ করুন।" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 lg:gap-10">
-          {/* Info Column */}
-          <div className="lg:col-span-5 bg-white dark:bg-slate-900 p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs space-y-5">
-            <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white border-l-4 border-red-600 pl-3">
-              অফিস ঠিকানা ও যোগাযোগ
-            </h3>
-
-            <div className="space-y-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
-              {siteSettings.address && !siteSettings.address.includes('প্রেসক্লাব ভবন') && (
-                <div className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
-                  <div>
-                    <strong className="block text-slate-900 dark:text-white">প্রধান কার্যালয়:</strong>
-                    <span>{siteSettings.address}</span>
-                  </div>
-                </div>
-              )}
-
-              <div className="flex items-start gap-3">
-                <Phone className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
-                <div>
-                  <strong className="block text-slate-900 dark:text-white">ফোন ও হটলাইন:</strong>
-                  <a 
-                    href={`tel:+88${(siteSettings.phone || '01306721743').replace(/[^0-9]/g, '').replace(/^88/, '').replace(/^0/, '0')}`} 
-                    className="hover:text-red-600 dark:hover:text-red-400 font-mono font-bold"
-                  >
-                    {siteSettings.phone || '01306721743'}
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <svg className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5 fill-current" viewBox="0 0 24 24">
-                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c4.54 0 8.24 3.7 8.24 8.24 0 2.2-.86 4.28-2.42 5.84a8.183 8.183 0 0 1-5.83 2.41c-1.47 0-2.93-.39-4.21-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.188 8.188 0 0 1-1.25-4.39c0-4.54 3.7-8.24 8.26-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.98-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.25-1.49-1.4-1.74-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.78 2.71 4.31 3.8.6.26 1.07.42 1.44.54.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.18-.47-.3z"/>
-                </svg>
-                <div>
-                  <strong className="block text-slate-900 dark:text-white">হোয়াটসঅ্যাপ:</strong>
-                  <a 
-                    href={`https://wa.me/88${(siteSettings.whatsapp || '01907655994').replace(/[^0-9]/g, '').replace(/^88/, '').replace(/^0/, '0')}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-emerald-600 dark:hover:text-emerald-400 font-mono font-bold"
-                  >
-                    {siteSettings.whatsapp || '01907655994'}
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Mail className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
-                <div>
-                  <strong className="block text-slate-900 dark:text-white">অফিশিয়াল ইমেইল:</strong>
-                  <a 
-                    href={`mailto:${(siteSettings.email || 'worldbusiness677@gmail.com').trim()}`}
-                    className="hover:text-blue-600 dark:hover:text-blue-400 font-mono font-bold break-all"
-                  >
-                    {siteSettings.email || 'worldbusiness677@gmail.com'}
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-3.5 border-t border-slate-100 dark:border-slate-800">
-              <h4 className="font-bold text-[11px] uppercase tracking-wider text-slate-400 mb-1.5">বিজ্ঞাপন ও বাণিজ্যিক যোগাযোগ</h4>
-              <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                অনলাইন পোর্টাল এবং সামাজিক যোগাযোগ মাধ্যমে ডিজিটাল বিজ্ঞাপনের রেটকার্ড ও স্পনসরশিপের জন্য সরাসরি ফোন, হোয়াটসঅ্যাপ অথবা ইমেইল করুন।
-              </p>
-            </div>
+        <div className="max-w-5xl mx-auto px-3 sm:px-5 py-5 sm:py-8 md:py-12">
+          <div className="mb-4 sm:mb-6 flex justify-center overflow-hidden">
+            <AdsterraSlot position="HOMEPAGE_TOP" />
           </div>
 
-          {/* Form Column */}
-          <div className="lg:col-span-7 bg-white dark:bg-slate-900 p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs">
-            <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white mb-4 sm:mb-6">
-              আমাদের একটি বার্তা পাঠান
-            </h3>
-
-            {contactSent && (
-              <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-500/30 rounded-xl flex items-center gap-2.5 text-emerald-700 dark:text-emerald-300 text-xs sm:text-sm">
-                <CheckCircle2 className="w-5 h-5 shrink-0" />
-                <span>আপনার বার্তাটি সফলভাবে পাঠানো হয়েছে। ধন্যবাদ!</span>
+          <section className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
+            <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-red-600 via-orange-500 to-red-600" />
+            <div className="px-4 sm:px-8 md:px-12 py-7 sm:py-10 md:py-12 text-center">
+              <div className="mx-auto mb-3 sm:mb-4 flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400 ring-1 ring-red-100 dark:ring-red-900/50">
+                <Megaphone className="h-6 w-6 sm:h-7 sm:w-7" />
               </div>
-            )}
+              <p className="text-[10px] sm:text-xs font-black uppercase tracking-[0.18em] text-red-600 dark:text-red-400">Khulna News 24 • Advertisement</p>
+              <h1 className="mt-1.5 sm:mt-2 text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-slate-900 dark:text-white">
+                বিজ্ঞাপন দিতে যোগাযোগ করুন
+              </h1>
+              <p className="mx-auto mt-3 max-w-2xl text-xs sm:text-sm md:text-base leading-7 text-slate-600 dark:text-slate-300">
+                বিজ্ঞাপন, স্পন্সরশিপ, ব্যবসায়িক প্রচার বা রেটকার্ডের তথ্য জানতে নিচের যেকোনো একটি মাধ্যম বেছে নিন। যোগাযোগের তথ্য স্ক্রিনে দেখানো হচ্ছে না—শুধু বোতামে ক্লিক করলেই সরাসরি সংশ্লিষ্ট মাধ্যমে পৌঁছে যাবেন।
+              </p>
 
-            <form onSubmit={handleContactSubmit} className="space-y-3.5 sm:space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">আপনার নাম *</label>
-                  <input
-                    type="text"
-                    required
-                    value={contactName}
-                    onChange={(e) => setContactName(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
-                    placeholder="নাম লিখুন"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">ইমেইল এড্রেস *</label>
-                  <input
-                    type="email"
-                    required
-                    value={contactEmail}
-                    onChange={(e) => setContactEmail(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
-                    placeholder="name@example.com"
-                  />
+              <div className="mx-auto mt-5 sm:mt-7 max-w-2xl rounded-xl sm:rounded-2xl border border-amber-200/80 dark:border-amber-900/50 bg-amber-50/80 dark:bg-amber-950/20 px-3.5 sm:px-5 py-3.5 sm:py-4 text-left">
+                <div className="flex items-start gap-2.5 sm:gap-3">
+                  <Info className="mt-0.5 h-4 w-4 sm:h-5 sm:w-5 shrink-0 text-amber-600 dark:text-amber-400" />
+                  <p className="text-[11px] sm:text-xs md:text-sm leading-6 text-amber-900 dark:text-amber-200">
+                    <strong>নির্দেশনা:</strong> বিজ্ঞাপন সংক্রান্ত বিষয়ে যোগাযোগের সময় আপনার প্রতিষ্ঠান/ব্র্যান্ডের নাম, বিজ্ঞাপনের ধরন এবং প্রয়োজনীয় সময়কাল সংক্ষেপে জানালে দ্রুত সাড়া দেওয়া সহজ হবে।
+                  </p>
                 </div>
               </div>
 
-              <div>
-                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">বিষয়</label>
-                <input
-                  type="text"
-                  value={contactSubject}
-                  onChange={(e) => setContactSubject(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
-                  placeholder="বার্তার বিষয়"
-                />
-              </div>
+              <div className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 text-left">
+                <a href={phoneLink} id="advertising-contact-phone" className="group rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-800/50 p-4 sm:p-5 transition-all hover:-translate-y-0.5 hover:border-red-300 hover:bg-white hover:shadow-md dark:hover:border-red-900 dark:hover:bg-slate-800" aria-label="ফোনে সরাসরি যোগাযোগ করুন">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-100 dark:bg-red-950/50 text-red-600 dark:text-red-400"><Phone className="h-5 w-5" /></div>
+                  <h2 className="mt-3 text-sm sm:text-base font-black text-slate-900 dark:text-white">ফোনে যোগাযোগ</h2>
+                  <p className="mt-1 text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">সরাসরি কল করতে ক্লিক করুন</p>
+                  <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-black text-red-600 dark:text-red-400">কল করুন <ExternalLink className="h-3.5 w-3.5" /></span>
+                </a>
 
-              <div>
-                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">বার্তা বা তথ্য *</label>
-                <textarea
-                  required
-                  rows={4}
-                  value={contactMessage}
-                  onChange={(e) => setContactMessage(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
-                  placeholder="আপনার বার্তা বিস্তারিত লিখুন..."
-                />
-              </div>
+                <a href={whatsappLink} target="_blank" rel="noopener noreferrer" id="advertising-contact-whatsapp" className="group rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-800/50 p-4 sm:p-5 transition-all hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-white hover:shadow-md dark:hover:border-emerald-900 dark:hover:bg-slate-800" aria-label="হোয়াটসঅ্যাপে সরাসরি যোগাযোগ করুন">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400"><MessageCircle className="h-5 w-5" /></div>
+                  <h2 className="mt-3 text-sm sm:text-base font-black text-slate-900 dark:text-white">WhatsApp</h2>
+                  <p className="mt-1 text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">চ্যাট শুরু করতে ক্লিক করুন</p>
+                  <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-black text-emerald-600 dark:text-emerald-400">মেসেজ করুন <ExternalLink className="h-3.5 w-3.5" /></span>
+                </a>
 
-              <button
-                type="submit"
-                className="w-full sm:w-auto px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2 shadow-2xs transition-colors cursor-pointer"
-              >
-                <Send className="w-4 h-4" /> বার্তা পাঠান
-              </button>
-            </form>
+                <a href={emailLink} id="advertising-contact-email" className="group rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-800/50 p-4 sm:p-5 transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:bg-white hover:shadow-md dark:hover:border-blue-900 dark:hover:bg-slate-800" aria-label="ইমেইলে সরাসরি যোগাযোগ করুন">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-100 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400"><Mail className="h-5 w-5" /></div>
+                  <h2 className="mt-3 text-sm sm:text-base font-black text-slate-900 dark:text-white">ইমেইল</h2>
+                  <p className="mt-1 text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">ইমেইল পাঠাতে ক্লিক করুন</p>
+                  <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-black text-blue-600 dark:text-blue-400">ইমেইল করুন <ExternalLink className="h-3.5 w-3.5" /></span>
+                </a>
+              </div>
+            </div>
+          </section>
+
+          <div className="mt-5 sm:mt-7 flex justify-center overflow-hidden">
+            <AdsterraSlot position="HOMEPAGE_MIDDLE" />
           </div>
         </div>
       </div>

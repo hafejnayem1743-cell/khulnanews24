@@ -249,3 +249,10 @@ body {
 @media (max-width: 640px) {
   .share-btn { min-height: 36px; padding: .5rem .62rem; }
 }
+
+
+/* v9.6 premium advertising layout */
+.ad-slot { min-height: 0; }
+.ad-slot > div { min-width: 0; }
+.ad-slot iframe { display: block; margin-inline: auto; }
+.ad-slot-native { width: 100%; }

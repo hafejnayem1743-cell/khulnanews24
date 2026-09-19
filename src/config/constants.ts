@@ -520,8 +520,7 @@ export const DEFAULT_AD_SLOTS: AdSlot[] = [
     name: 'Header Banner (728x90 / Responsive)',
     position: 'HEADER_BANNER',
     isActive: true,
-    adCode: `<div class="w-full h-full bg-slate-50 dark:bg-slate-800/60 flex flex-col items-center justify-center p-3 text-center border border-dashed border-red-200 dark:border-slate-700 rounded-xl"><span class="text-[10px] uppercase font-bold text-red-600 dark:text-red-400 tracking-wider">বিজ্ঞাপন স্লট / Adsterra Banner (728x90)</span></div>`,
-    mobileCode: `<div class="w-full bg-slate-100 dark:bg-slate-800 p-2 text-center text-[10px] text-slate-500 rounded border border-dashed border-slate-300 dark:border-slate-700">Adsterra Mobile 320x50 Banner Slot</div>`,
+    adCode: `<script>atOptions = {'key' : 'c871f5d4559093c55fdfa2485e072c70','format' : 'iframe','height' : 90,'width' : 728,'params' : {}};</script><script src="https://www.highrevenueformat.com/c871f5d4559093c55fdfa2485e072c70/invoke.js"></script>`,
     priority: 1,
     adsterraType: 'banner'
   },
@@ -530,7 +529,7 @@ export const DEFAULT_AD_SLOTS: AdSlot[] = [
     name: 'Homepage Top Banner',
     position: 'HOMEPAGE_TOP',
     isActive: true,
-    adCode: `<div class="w-full py-4 bg-slate-50 dark:bg-slate-800/60 rounded border border-dashed border-slate-300 dark:border-slate-700 text-center"><span class="text-[10px] font-semibold text-slate-400">বিজ্ঞাপন (Adsterra 970x90 / Leaderboard)</span><p class="text-sm font-bold text-red-600 mt-1">খুলনার যেকোনো ব্যবসার ডিজিটাল প্রচারণায় খুলনা নিউজ নির্ভরযোগ্য পার্টনার</p></div>`,
+    adCode: `<script>atOptions = {'key' : 'c871f5d4559093c55fdfa2485e072c70','format' : 'iframe','height' : 90,'width' : 728,'params' : {}};</script><script src="https://www.highrevenueformat.com/c871f5d4559093c55fdfa2485e072c70/invoke.js"></script>`,
     priority: 2,
     adsterraType: 'banner'
   },
@@ -539,34 +538,34 @@ export const DEFAULT_AD_SLOTS: AdSlot[] = [
     name: 'Homepage Middle Banner',
     position: 'HOMEPAGE_MIDDLE',
     isActive: true,
-    adCode: `<div class="w-full py-6 bg-slate-50 dark:bg-slate-800/80 rounded border border-dashed border-slate-300 dark:border-slate-700 text-center"><span class="text-[10px] font-semibold text-slate-400">Adsterra Native / Banner (Middle Section)</span><p class="text-xs text-slate-600 dark:text-slate-400 mt-1">Admin Panel থেকে Adsterra Code প্রতিস্থাপন করুন</p></div>`,
+    adCode: `<script>atOptions = {'key' : 'c871f5d4559093c55fdfa2485e072c70','format' : 'iframe','height' : 90,'width' : 728,'params' : {}};</script><script src="https://www.highrevenueformat.com/c871f5d4559093c55fdfa2485e072c70/invoke.js"></script>`,
     priority: 3,
-    adsterraType: 'native'
+    adsterraType: 'banner'
   },
   {
     id: 'ad-sidebar-top',
     name: 'Sidebar Top Square (300x250)',
     position: 'SIDEBAR_TOP',
     isActive: true,
-    adCode: `<div class="w-full h-[250px] bg-slate-100 dark:bg-slate-800/90 rounded border border-dashed border-slate-300 dark:border-slate-700 flex flex-col items-center justify-center p-4 text-center"><span class="text-[10px] uppercase font-bold text-red-500">Adsterra 300x250</span><p class="text-sm font-bold text-slate-800 dark:text-slate-200 mt-2">স্পন্সরড বিজ্ঞাপন</p><p class="text-xs text-slate-500 mt-1">আপনার ব্র্যান্ডকে পৌঁছে দিন লাখো পাঠকের কাছে</p></div>`,
+    adCode: `<script async="async" data-cfasync="false" src="https://pl31404088.profitableratecpmnetwork.com/429709e3416bbabd55849785b662ca8f/invoke.js"></script><div id="container-429709e3416bbabd55849785b662ca8f"></div>`,
     priority: 4,
-    adsterraType: 'banner'
+    adsterraType: 'native'
   },
   {
     id: 'ad-sidebar-middle',
     name: 'Sidebar Middle Banner',
     position: 'SIDEBAR_MIDDLE',
-    isActive: true,
-    adCode: `<div class="w-full h-[250px] bg-slate-100 dark:bg-slate-800/90 rounded border border-dashed border-slate-300 dark:border-slate-700 flex flex-col items-center justify-center p-4 text-center"><span class="text-[10px] uppercase font-bold text-slate-400">Adsterra Sidebar 300x250</span></div>`,
+    isActive: false,
+    adCode: `<script async="async" data-cfasync="false" src="https://pl31404088.profitableratecpmnetwork.com/429709e3416bbabd55849785b662ca8f/invoke.js"></script><div id="container-429709e3416bbabd55849785b662ca8f"></div>`,
     priority: 5,
-    adsterraType: 'banner'
+    adsterraType: 'native'
   },
   {
     id: 'ad-article-top',
     name: 'Article Top Banner',
     position: 'ARTICLE_TOP',
     isActive: true,
-    adCode: `<div class="w-full py-3 bg-slate-50 dark:bg-slate-800/50 rounded border border-dashed border-slate-200 dark:border-slate-700 text-center"><span class="text-[9px] font-bold text-slate-400">বিজ্ঞাপন (Article Top)</span></div>`,
+    adCode: `<script>atOptions = {'key' : 'c871f5d4559093c55fdfa2485e072c70','format' : 'iframe','height' : 90,'width' : 728,'params' : {}};</script><script src="https://www.highrevenueformat.com/c871f5d4559093c55fdfa2485e072c70/invoke.js"></script>`,
     priority: 6,
     adsterraType: 'banner'
   },
@@ -575,16 +574,16 @@ export const DEFAULT_AD_SLOTS: AdSlot[] = [
     name: 'Article Middle Banner',
     position: 'ARTICLE_MIDDLE',
     isActive: true,
-    adCode: `<div class="w-full py-4 my-6 bg-slate-50 dark:bg-slate-800/50 rounded border border-dashed border-slate-200 dark:border-slate-700 text-center"><span class="text-[9px] font-bold text-slate-400">বিজ্ঞাপন (Article Inline / Native Ad)</span></div>`,
+    adCode: `<script>atOptions = {'key' : 'c871f5d4559093c55fdfa2485e072c70','format' : 'iframe','height' : 90,'width' : 728,'params' : {}};</script><script src="https://www.highrevenueformat.com/c871f5d4559093c55fdfa2485e072c70/invoke.js"></script>`,
     priority: 7,
-    adsterraType: 'native'
+    adsterraType: 'banner'
   },
   {
     id: 'ad-article-bottom',
     name: 'Article Bottom Banner',
     position: 'ARTICLE_BOTTOM',
     isActive: true,
-    adCode: `<div class="w-full py-3 mt-4 bg-slate-50 dark:bg-slate-800/50 rounded border border-dashed border-slate-200 dark:border-slate-700 text-center"><span class="text-[9px] font-bold text-slate-400">বিজ্ঞাপন (Article Bottom)</span></div>`,
+    adCode: `<script>atOptions = {'key' : 'c871f5d4559093c55fdfa2485e072c70','format' : 'iframe','height' : 90,'width' : 728,'params' : {}};</script><script src="https://www.highrevenueformat.com/c871f5d4559093c55fdfa2485e072c70/invoke.js"></script>`,
     priority: 8,
     adsterraType: 'banner'
   },
@@ -593,7 +592,7 @@ export const DEFAULT_AD_SLOTS: AdSlot[] = [
     name: 'Adsterra Social Bar',
     position: 'SOCIAL_BAR',
     isActive: false,
-    adCode: `<!-- Adsterra Social Bar Code Here -->`,
+    adCode: `<script src="https://pl31404090.profitableratecpmnetwork.com/80/eb/93/80eb93181df6c6d812dc27e1c7be49e6.js"></script>`,
     priority: 9,
     adsterraType: 'social_bar'
   },
@@ -602,7 +601,7 @@ export const DEFAULT_AD_SLOTS: AdSlot[] = [
     name: 'Adsterra Popunder',
     position: 'POPUNDER',
     isActive: false,
-    adCode: `<!-- Adsterra Popunder Script Here -->`,
+    adCode: `<script src="https://pl31404089.profitableratecpmnetwork.com/32/7b/c4/327bc41935c3bde1f158cd92e2371cf0.js"></script>`,
     priority: 10,
     adsterraType: 'popunder'
   }

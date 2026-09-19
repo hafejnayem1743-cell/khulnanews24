@@ -10,55 +10,58 @@ interface AdsterraSlotProps {
 export const AdsterraSlot: React.FC<AdsterraSlotProps> = ({ position, className = '' }) => {
   const { adSlots } = useNews();
   const containerRef = useRef<HTMLDivElement>(null);
-
   const slot = adSlots.find(s => s.position === position && s.isActive);
 
   useEffect(() => {
-    if (!slot || !containerRef.current) return;
-    
-    // Choose desktop code or mobile code if screen is small
-    const isMobile = window.innerWidth < 768;
-    const codeToInject = (isMobile && slot.mobileCode) ? slot.mobileCode : slot.adCode;
+    const container = containerRef.current;
+    if (!container) return;
+    container.innerHTML = '';
+    if (!slot?.adCode?.trim()) return;
 
+    const isMobile = window.innerWidth < 768;
+    const codeToInject = (isMobile && slot.mobileCode?.trim()) ? slot.mobileCode : slot.adCode;
     if (!codeToInject) return;
 
-    // Clean previous content
-    containerRef.current.innerHTML = '';
-
-    // Create a shadow container or direct DOM parsing for scripts
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = codeToInject;
-
-    // Execute scripts if any exist in the adCode
-    const scripts = tempDiv.getElementsByTagName('script');
-    const scriptsArray = Array.from(scripts);
-
-    // Append non-script elements
-    while (tempDiv.firstChild) {
-      if (tempDiv.firstChild.nodeName !== 'SCRIPT') {
-        containerRef.current.appendChild(tempDiv.firstChild);
-      } else {
-        tempDiv.removeChild(tempDiv.firstChild);
-      }
+    // Adsterra's Native Banner code contains a fixed container id. The same
+    // native unit should not be mounted twice in one document. If another
+    // copy of this exact native container is already present, leave this slot
+    // empty instead of creating duplicate ids or double-loading the unit.
+    const nativeContainerMatch = codeToInject.match(/id=["'](container-[^"']+)["']/i);
+    if (nativeContainerMatch && document.querySelector(`#${CSS.escape(nativeContainerMatch[1])}`)) {
+      return;
     }
 
-    // Safely re-create and execute script tags
-    scriptsArray.forEach(oldScript => {
-      const newScript = document.createElement('script');
-      Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
-      newScript.appendChild(document.createTextNode(oldScript.innerHTML));
-      containerRef.current?.appendChild(newScript);
+    const temp = document.createElement('div');
+    temp.innerHTML = codeToInject;
+    const scripts = Array.from(temp.querySelectorAll('script'));
+
+    Array.from(temp.childNodes).forEach(node => {
+      if (node.nodeName !== 'SCRIPT') container.appendChild(node);
     });
-  }, [slot]);
+
+    scripts.forEach(oldScript => {
+      const script = document.createElement('script');
+      Array.from(oldScript.attributes).forEach(attr => script.setAttribute(attr.name, attr.value));
+      script.text = oldScript.textContent || '';
+      container.appendChild(script);
+    });
+
+    return () => {
+      container.innerHTML = '';
+    };
+  }, [slot?.id, slot?.adCode, slot?.mobileCode, slot?.isActive]);
 
   if (!slot) return null;
 
+  const isOverlay = position === 'SOCIAL_BAR' || position === 'POPUNDER';
+
   return (
-    <div 
-      id={`ad-slot-${position.toLowerCase().replace(/_/g, '-')}`} 
-      className={`ad-slot my-3 flex justify-center items-center overflow-hidden transition-all ${className}`}
+    <div
+      id={`ad-slot-${position.toLowerCase().replace(/_/g, '-')}`}
+      className={`${isOverlay ? 'ad-overlay-slot' : 'ad-slot my-3 flex justify-center items-center overflow-hidden transition-all'} ${className}`}
+      aria-label={isOverlay ? undefined : 'Advertisement'}
     >
-      <div ref={containerRef} className="w-full flex justify-center" />
+      <div ref={containerRef} className={isOverlay ? '' : 'w-full flex justify-center'} />
     </div>
   );
 };

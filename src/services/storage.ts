@@ -269,21 +269,41 @@ export const StorageService = {
 
   // --- ADVERTISEMENTS ---
   getAdSlots(): AdSlot[] {
-    const slots = getStored<AdSlot[]>(STORAGE_KEYS.AD_SLOTS, DEFAULT_AD_SLOTS);
+    const stored = getStored<AdSlot[] | null>(STORAGE_KEYS.AD_SLOTS, null);
+    if (!stored) return DEFAULT_AD_SLOTS;
+
+    const defaultByPosition = new Map(DEFAULT_AD_SLOTS.map(slot => [slot.position, slot]));
     let modified = false;
-    const sanitized = slots.map(slot => {
-      if (slot.adCode && slot.adCode.includes('ads@khulnanews.com')) {
-        modified = true;
-        return {
-          ...slot,
-          adCode: `<div class="w-full h-full bg-slate-50 dark:bg-slate-800/60 flex flex-col items-center justify-center p-3 text-center border border-dashed border-red-200 dark:border-slate-700 rounded-xl"><span class="text-[10px] uppercase font-bold text-red-600 dark:text-red-400 tracking-wider">বিজ্ঞাপন স্লট / Adsterra Banner (728x90)</span></div>`
-        };
-      }
-      return slot;
+
+    const sanitized = stored.map(slot => {
+      const defaultSlot = defaultByPosition.get(slot.position);
+      if (!defaultSlot) return slot;
+
+      const isLegacyDemo =
+        !slot.adCode ||
+        slot.adCode.includes('ads@khulnanews.com') ||
+        slot.adCode.includes('Adsterra Banner (728x90)') ||
+        slot.adCode.includes('Adsterra Mobile 320x50 Banner Slot') ||
+        slot.adCode.includes('Admin Panel থেকে Adsterra Code') ||
+        slot.adCode.includes('Adsterra Native / Banner') ||
+        slot.adCode.includes('Adsterra 300x250') ||
+        slot.adCode.includes('Article Top)') ||
+        slot.adCode.includes('Article Bottom)') ||
+        slot.adCode.includes('Social Bar Code Here') ||
+        slot.adCode.includes('Popunder Script Here');
+
+      if (!isLegacyDemo) return slot;
+
+      modified = true;
+      return {
+        ...slot,
+        adCode: defaultSlot.adCode,
+        mobileCode: defaultSlot.mobileCode,
+        adsterraType: defaultSlot.adsterraType
+      };
     });
-    if (modified) {
-      this.saveAdSlots(sanitized);
-    }
+
+    if (modified) this.saveAdSlots(sanitized);
     return sanitized;
   },
 

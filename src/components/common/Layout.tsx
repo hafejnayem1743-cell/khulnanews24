@@ -2,7 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Header } from './Header';
 import { Footer } from './Footer';
-import { ContactSection } from './ContactSection';
+import { AdsterraSlot } from './AdsterraSlot';
 import { BreakingNewsTicker } from './BreakingNewsTicker';
 
 export const Layout: React.FC = () => {
@@ -19,8 +19,9 @@ export const Layout: React.FC = () => {
         <Outlet />
       </div>
 
-      {/* Global Bottom Contact Section */}
-      <ContactSection />
+      {/* Global Adsterra overlays (admin controlled) */}
+      <AdsterraSlot position="SOCIAL_BAR" />
+      <AdsterraSlot position="POPUNDER" />
 
       {/* Global Footer */}
       <Footer />

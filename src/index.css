@@ -217,3 +217,35 @@ body {
   .social-share-bar > div { width: 100%; }
   .social-share-bar a, .social-share-bar button { min-height: 36px; }
 }
+
+/* v9.5 premium share buttons */
+.share-btn {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .375rem;
+  padding: .5rem .7rem;
+  border-radius: .75rem;
+  color: #fff;
+  font-size: .75rem;
+  font-weight: 800;
+  box-shadow: 0 1px 2px rgba(15,23,42,.08);
+  transition: transform .18s ease, opacity .18s ease, box-shadow .18s ease;
+}
+.share-btn:hover { transform: translateY(-1px); box-shadow: 0 5px 14px rgba(15,23,42,.12); }
+.share-btn:active { transform: translateY(0) scale(.97); }
+.share-btn-facebook { background: #1877F2; }
+.share-btn-whatsapp { background: #25D366; }
+.share-btn-telegram { background: #229ED9; }
+.share-btn-x { background: #050505; }
+.share-btn-instagram { background: linear-gradient(135deg,#833AB4,#E1306C,#F77737); }
+.share-btn-native { background: #D32F2F; }
+.share-btn-copy { background: #e2e8f0; color: #334155; }
+.share-btn-print { background: #0f172a; color: #fff; }
+.dark .share-btn-copy { background: #334155; color: #e2e8f0; }
+.ad-overlay-slot { width: 0; height: 0; overflow: visible; }
+.ad-slot iframe { max-width: 100%; border: 0; }
+@media (max-width: 640px) {
+  .share-btn { min-height: 36px; padding: .5rem .62rem; }
+}

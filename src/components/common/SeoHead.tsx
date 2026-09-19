@@ -55,7 +55,7 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
   const finalImage = image || (news?.featuredImage) || siteSettings.defaultSocialImage || 'https://images.unsplash.com/photo-1541427468627-a89a96e5ca1d?auto=format&fit=crop&w=1200&q=80';
   
   // Clean canonical URL without hashes or trailing slashes (except root)
-  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://khulnanews.com';
+  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://khulnanews24.pages.dev';
   let finalCanonicalUrl = url;
   if (!finalCanonicalUrl && typeof window !== 'undefined') {
     finalCanonicalUrl = `${origin}${window.location.pathname}`;
@@ -99,12 +99,15 @@ export const SeoHead: React.FC<SeoHeadProps> = ({
     setMetaTag('meta[property="og:type"]', 'content', type);
     setMetaTag('meta[property="og:site_name"]', 'content', brandName);
     setMetaTag('meta[property="og:locale"]', 'content', 'bn_BD');
+    setMetaTag('meta[property="og:image:alt"]', 'content', finalTitle);
+    setMetaTag('meta[property="og:image:type"]', 'content', 'image/jpeg');
 
     // 4. Twitter / X Cards
     setMetaTag('meta[name="twitter:card"]', 'content', 'summary_large_image');
     setMetaTag('meta[name="twitter:title"]', 'content', finalTitle);
     setMetaTag('meta[name="twitter:description"]', 'content', cleanDescription);
     setMetaTag('meta[name="twitter:image"]', 'content', finalImage);
+    setMetaTag('meta[name="twitter:url"]', 'content', finalCanonicalUrl || '');
 
     // 5. Article-specific meta tags
     if (type === 'article' && news) {

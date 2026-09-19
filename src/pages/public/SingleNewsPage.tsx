@@ -339,6 +339,8 @@ export const SingleNewsPage: React.FC = () => {
                 newsId={currentNews.id}
                 title={currentNews.title} 
                 summary={currentNews.summary} 
+                image={rawImage}
+                url={typeof window !== 'undefined' ? window.location.href : undefined}
                 likeCount={engagement.likes}
                 shareCount={engagement.shares}
                 onFontSizeChange={handleFontSize}
@@ -494,6 +496,8 @@ export const SingleNewsPage: React.FC = () => {
                   newsId={currentNews.id}
                   title={currentNews.title} 
                   summary={currentNews.summary} 
+                  image={rawImage}
+                  url={typeof window !== 'undefined' ? window.location.href : undefined}
                   likeCount={engagement.likes}
                   shareCount={engagement.shares}
                 />

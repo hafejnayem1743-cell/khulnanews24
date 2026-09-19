@@ -155,7 +155,7 @@ export const DistrictPage: React.FC<DistrictPageProps> = ({ districtSlug: propSl
   ];
 
   // District JSON-LD schema
-  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://khulnanews.com';
+  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://khulnanews24.pages.dev';
   const districtSchema = generateDistrictSchema(
     districtBangla,
     districtEnglish,
@@ -453,7 +453,7 @@ export const DistrictPage: React.FC<DistrictPageProps> = ({ districtSlug: propSl
             </div>
 
             {/* Adsterra Slot */}
-            <AdsterraSlot position="SIDEBAR" />
+            <AdsterraSlot position="SIDEBAR_TOP" />
 
             {/* Most Read in Khulna Division */}
             <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 sm:p-5 border border-slate-200/80 dark:border-slate-800 shadow-2xs">
